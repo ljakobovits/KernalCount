@@ -10,7 +10,7 @@
 
 $(document).ready(function(){
 
-
+    console.log("hi");
 
 	newGame();
 	randomNumber  = pickNumber();
@@ -41,48 +41,6 @@ $(document).ready(function(){
 
   });
 
-	
-/*
-	while (validGuess() === false) {
-
-		$("form").submit(function(event){
-		
-		event.preventDefault();
-    	userGuess = $('#userGuess').val();
-    	console.log("User Guess: " + userGuess);
-    	$('#userGuess').val("");
-
-      });
-	}
-
-
-	*/
-
-	
-
-    	/*
-    	if (!found) {
-			userChoice = $('#userGuess').val();
-			console.log("User Choice = "+ userChoice);
-			clearText();
-			setFocus();
-			guessFlag = checkChoice(userChoice);
-			if (!guessFlag) {
-				guessCount++;
-				setCount(guessCount);
-				$("ul#guessList").append("<li>" + userChoice + "</li>");
-				guessFlag = checkTemparature(Math.abs(randomNumber - userChoice));
-			};
-		} else {
-			setFeedback("You Won this game already! You need to start a new game.");
-			//disableGuess();
-		}; */
-
-	
-
-	$(".guessButton").click(function(){
-		userGuess = getGuess();
-	});
 
 	
 	
@@ -168,8 +126,8 @@ function checkValidity(userGuess) {
 		console.log ("answer " + answer)
 		console.log ("guess " + guess)
 		if (+guess === +answer) {
-			$('#feedback').text("You got it!  It took you " +guessCount " guesses.");
-			userWon = 1
+			$('#feedback').text("You got it!  It took you " +guessCount + " guesses.");
+			userWon = 1;
 		}
 		else if (Math.abs(answer-guess) < 10) {
 			$('#feedback').text("VERY Hot! (within 10)");
