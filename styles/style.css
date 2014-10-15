@@ -88,13 +88,26 @@ h1 {
 
 /*style for hidden modal*/
 .overlay {
-	width: 100%;
-	height: 100%;
+	width: 800px;
+	height: 500px;
 	color: #fff;
-	background: #e74c3c;
+	background: #6f22b6;
 	position: absolute;
-	top: 0;
+	top: 50px;
 	left: 0;
+	margin: 0;
+	z-index: 1000;
+	display: none;
+}
+
+.overlay2 {
+	width: 800px;
+	height: 500px;
+	color: #fff;
+	background: #6f22b6;
+	position: absolute;
+	top: 50px;
+	left: 20%;
 	margin: 0;
 	z-index: 1000;
 	display: none;
@@ -107,7 +120,7 @@ h1 {
 	height: auto;
 	width: 600px;
 	border-radius: 3px;
-	top: 15%;
+	top: 7%;
 	margin: auto auto;
 	border: 1px solid rgba(0,0,0,0.1);
 }
@@ -167,6 +180,7 @@ h1 {
    Game Section Styles
 ---------------------------------------------------------------------------------*/
 
+
 .game {
 	position: relative;
 	background-color: #394264;
@@ -210,7 +224,7 @@ h1 {
 
 h2 {
 	margin: 0 auto;	
-	background: #cc324b;
+	background: #FBEB50;
 	padding: 1em 0.4em;
 	font-size: 1.5em;
 	font-weight: 400;
@@ -218,7 +232,7 @@ h2 {
 	line-height: 1em;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	color: #fff;
+	color: #1F253D;
 }
 
 .game p {
