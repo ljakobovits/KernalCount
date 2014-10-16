@@ -37,6 +37,10 @@ $(document).ready(function(){
 				giveFeedback(userGuess, randomNumber);
 				recordGuess(userGuess);
 
+
+				guessCount++;
+				$('#count').text(guessCount);
+
 				/*
 				if (previousGuess) {
 					comparePriorGuess(userGuess, randomNumber, previousGuess);
@@ -49,10 +53,7 @@ $(document).ready(function(){
 		previousGuess = userGuess;
 		console.log("previous guess: " + previousGuess)
 		$('#userGuess').val("");
-		if (!userWon) {
-			guessCount++;
-			$('#count').text(guessCount);
-		}
+		
 
   });
 
