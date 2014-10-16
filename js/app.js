@@ -6,11 +6,12 @@
 	var validGuess;
 	var guessCount;
 	var maxValue;
+	var previousGuess;
 
 
 $(document).ready(function(){
 
-    console.log("hi");
+    console.log("yooo");
 
 	newGame();
 	randomNumber  = pickNumber();
@@ -32,12 +33,25 @@ $(document).ready(function(){
     	}
     	else {
 			validGuess = checkValidity(userGuess);
+			
 			if (validGuess) {
 				giveFeedback(userGuess, randomNumber);
 				recordGuess(userGuess);
+
+				if (previousGuess) {
+					comparePriorGuess(userGuess, randomNumber, previousGuess);
+					
+				}
+
 			}
 		}
-			$('#userGuess').val("");
+		previousGuess = userGuess;
+		console.log("previous guess: " + previousGuess)
+		$('#userGuess').val("");
+		if (!userWon) {
+			guessCount++;
+			$('#count').text(guessCount);
+		}
 
   });
 
@@ -81,9 +95,12 @@ newGame = function(){
 	$('#userGuess').val("");
 	validGuess = 0;
 	console.log("valid guess: " + validGuess);
-	guessCount = 0;
+	guessCount = 1;
 	userWon = 0;
-
+	$('#count').text(guessCount);
+	$('#guessList').text("");
+	console.log("reset");
+	previousGuess = 0;
 
 }
 
@@ -129,33 +146,54 @@ function checkValidity(userGuess) {
 			$('#feedback').text("You got it!  It took you " +guessCount + " guesses.");
 			userWon = 1;
 		}
-		else if (Math.abs(answer-guess) < 10) {
-			$('#feedback').text("VERY Hot! (within 10)");
+		else if (Math.abs(answer-guess) < 5) {
+			$('#feedback').text("You're VERY Hot!");
 		}
 
-		else if (Math.abs(answer-guess) < 30) {
-			$('#feedback').text("Hot! (within 20)");
+		else if (Math.abs(answer-guess) < 10) {
+			$('#feedback').text("You're Hot!");
 		}
 		
+		else if (Math.abs(answer-guess) < 30) {
+			$('#feedback').text("You're Warm.");
+		}
+
 		else if (Math.abs(answer-guess) < 50) {
-			$('#feedback').text(" Warm (within 50)");
+			$('#feedback').text("You're Cool.");
 		}
 
 		else if (Math.abs(answer-guess) <= 100) {
-			$('#feedback').text("Cool (within 100)");
+			$('#feedback').text("You're Cold.");
 		}
 
 		else {
-			$('#feedback').text("Cold (off by more than 100)");
+			$('#feedback').text("You're Very Cold.");
+		}
+	}
+
+
+	function comparePriorGuess(guess, answer, lastGuess) {
+		console.log ("prior guess");
+
+		if (+guess === +answer) {
+			
+		}
+
+		else if(Math.abs(answer-guess) > Math.abs(answer-lastGuess))
+		{
+			$('#feedback').append(" Getting Colder.");
+		}
+
+		else
+		{
+			$('#feedback').append(" Getting Hotter.");
 		}
 	}
 
 
 
 	function recordGuess (guess) {
-		guessCount++;
 		console.log("Valid Guesses: "+guessCount);
-		$('#count').text(guessCount);
 		$('#guessList').append('<li>'+guess+'</li>');
 	}
 
