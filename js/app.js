@@ -11,8 +11,6 @@
 
 $(document).ready(function(){
 
-    console.log("yooo");
-
 	newGame();
 	randomNumber  = pickNumber();
 
@@ -35,13 +33,16 @@ $(document).ready(function(){
 			validGuess = checkValidity(userGuess);
 			
 			if (validGuess) {
+				lowOrHigh(userGuess, randomNumber);
 				giveFeedback(userGuess, randomNumber);
 				recordGuess(userGuess);
 
+				/*
 				if (previousGuess) {
 					comparePriorGuess(userGuess, randomNumber, previousGuess);
 					
 				}
+				*/
 
 			}
 		}
@@ -87,6 +88,7 @@ $(document).ready(function(){
 /* Define Functions */
 
 maxValue = 1000;
+minValue = 500;
 
 newGame = function(){
 	setFocus();
@@ -106,7 +108,7 @@ newGame = function(){
 
 
 function pickNumber() {
-	randomNumber = Math.floor(Math.random() * maxValue);
+	randomNumber = Math.floor(Math.random() * (maxValue-minValue)+minValue);
 	console.log("Random Number: " + randomNumber);
 	return randomNumber;
 }
@@ -138,40 +140,49 @@ function checkValidity(userGuess) {
 
 }
 
+function lowOrHigh(guess, answer) {
 
+	if (answer > guess) {
+		$('#feedback').text("Too Low. ");
+	}
+
+	else if (answer < guess) {
+		$('#feedback').text("Too High. ");
+	}
+
+
+}
 	function giveFeedback(guess, answer) {
-		console.log ("answer " + answer)
-		console.log ("guess " + guess)
 		if (+guess === +answer) {
 			$('#feedback').text("You got it!  It took you " +guessCount + " guesses.");
 			userWon = 1;
 		}
 		else if (Math.abs(answer-guess) < 5) {
-			$('#feedback').text("You're VERY Hot!");
+			$('#feedback').append("You're VERY Hot!");
 		}
 
-		else if (Math.abs(answer-guess) < 10) {
-			$('#feedback').text("You're Hot!");
+		else if (Math.abs(answer-guess) < 15) {
+			$('#feedback').append("You're Hot!");
 		}
 		
 		else if (Math.abs(answer-guess) < 30) {
-			$('#feedback').text("You're Warm.");
+			$('#feedback').append("You're Warm.");
 		}
 
 		else if (Math.abs(answer-guess) < 50) {
-			$('#feedback').text("You're Cool.");
+			$('#feedback').append("You're Cool.");
 		}
 
-		else if (Math.abs(answer-guess) <= 100) {
-			$('#feedback').text("You're Cold.");
+		else if (Math.abs(answer-guess) <= 150) {
+			$('#feedback').append("You're Cold.");
 		}
 
 		else {
-			$('#feedback').text("You're Very Cold.");
+			$('#feedback').append("You're Very Cold.");
 		}
 	}
 
-
+/*
 	function comparePriorGuess(guess, answer, lastGuess) {
 		console.log ("prior guess");
 
@@ -181,14 +192,15 @@ function checkValidity(userGuess) {
 
 		else if(Math.abs(answer-guess) > Math.abs(answer-lastGuess))
 		{
-			$('#feedback').append(" Getting Colder.");
+			$('#feedback').append(" Getting Cooler.");
 		}
 
 		else
 		{
-			$('#feedback').append(" Getting Hotter.");
+			$('#feedback').append(" Getting Warmer.");
 		}
 	}
+	*/
 
 
 
